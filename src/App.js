@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import LearningForm from './components/LearningForm';
+import LearningList from './components/LearningList';
+import ProgressChart from './components/ProgressChart';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [refresh, setRefresh] = useState(false);
+
+    const triggerRefresh = () => {
+        setRefresh(!refresh);
+    };
+
+    return (
+        <div className="App">
+            <h2>Tech Learning Tracker Dashboard</h2>
+
+            <LearningForm onItemAdded={triggerRefresh} />
+            <hr />
+
+            <LearningList refreshTrigger={refresh} />
+            <hr />
+
+            <ProgressChart />
+        </div>
+    );
 }
 
 export default App;
